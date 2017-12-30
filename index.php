@@ -48,7 +48,7 @@ echo "hello";
 			curl_setopt($curl, CURLOPT_HEADER, false);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',"Authorization: Bearer A21AAHqpzgAtOC_RhsVgPfn4iUtigaKWMhObR8a4pn8LpkutdJ2dVTyj_V4FsqXXsoN5PzM9D7LsroToncJS1EWOnY_fR9MIA"));
-			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($arr1));
 
 			// Make the REST call, returning the result
 			$response = curl_exec($curl);
