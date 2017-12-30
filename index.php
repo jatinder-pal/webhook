@@ -35,13 +35,16 @@ $data = '';
 		}
 echo "hello";
 			$curl = curl_init("https://api.sandbox.paypal.com/v1/shipping/trackers");
-			$data = array(
-			  "transaction_id"=>"123456789",
-			  "tracking_number"=>"XYZ123456",
-				"status"=>"SHIPPED",
-				"shipment_date"=>"2015-05-31",
-				"carrier"=>"SG_SG_POST"
-			  );
+			$data = { "trackers": [
+				{
+				"transaction_id": "123456789",
+				"tracking_number": "XYZ123456",
+				"status": "SHIPPED",
+				"shipment_date": "2015-05-31",
+				"carrier": "SG_SG_POST"
+				}
+				]
+				};
 			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
 			curl_setopt($curl, CURLOPT_HEADER, false);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
