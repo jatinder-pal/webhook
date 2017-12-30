@@ -37,11 +37,11 @@ echo "hello";
 			$curl = curl_init("https://api.sandbox.paypal.com/v1/shipping/trackers");
 			$data = { "trackers": [
 				{
-				"transaction_id": "123456789",
-				"tracking_number": "XYZ123456",
-				"status": "SHIPPED",
-				"shipment_date": "2015-05-31",
-				"carrier": "SG_SG_POST"
+				"transaction_id"=>"123456789",
+				"tracking_number"=>"XYZ123456",
+				"status"=>"SHIPPED",
+				"shipment_date"=>"2015-05-31",
+				"carrier"=>"SG_SG_POST"
 				}
 				]
 				};
