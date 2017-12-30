@@ -33,22 +33,24 @@ $data = '';
 		curl_close($ch);
 		return $data;
 		}
-			$data = {
-				"trackers": [
-				{
-				"transaction_id": "123456789",
-				"tracking_number": "XYZ123456",
+			$curl = curl_init($url . "https://api.sandbox.paypal.com/v1/shipping/trackers");
+			$data = array(
+			  "transaction_id": "123456789",
+			  "tracking_number": "XYZ123456",
 				"status": "SHIPPED",
 				"shipment_date": "2015-05-31",
 				"carrier": "SG_SG_POST"
-				}
-				]
-			};
-			$ch = curl_init("https://api.sandbox.paypal.com/v1/shipping/trackers/123456789-XYZ123456");
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); 
-			curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			$response = curl_exec($ch);
-				curl_close($ch); // close curl session
-			print_r(json_decode($response, true));
+			  );
+			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+			curl_setopt($curl, CURLOPT_HEADER, false);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',"Authorization: Bearer access_token$sandbox$mh5ztgxz3p9pjk8d$77b48e220fdb04a171060b98f2525887"));
+			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+
+			// Make the REST call, returning the result
+			$response = curl_exec($curl);
+			print_r($response );
+			if (!$response) {
+				die("Connection Failure.n");
+			}
 	?>
