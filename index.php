@@ -42,7 +42,8 @@ echo "hello";
 				"shipment_date"=>"2015-05-31",
 				"carrier"=>"SG_SG_POST"
 				);
-				print_r($data);
+				$arr1=json_decode($data, true);
+				print_r($arr1);
 			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
 			curl_setopt($curl, CURLOPT_HEADER, false);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
