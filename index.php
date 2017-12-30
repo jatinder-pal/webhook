@@ -34,7 +34,7 @@ $data = '';
 		return $data;
 		}
 echo "hello";
-			$curl = curl_init($url . "https://api.sandbox.paypal.com/v1/shipping/trackers");
+			$curl = curl_init("https://api.sandbox.paypal.com/v1/shipping/trackers");
 			$data = array(
 			  "transaction_id": "123456789",
 			  "tracking_number": "XYZ123456",
