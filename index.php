@@ -39,12 +39,12 @@ echo "hello";
 				"transaction_id"=>"4HP7632602663452F",
 				"tracking_number"=>"XYZ123456",
 				"status"=>"SHIPPED",
-				"shipment_date"=>"2018-05-31",
+				//"shipment_date"=>"2018-05-31",
 				"carrier"=>"FEDEX"
 				);
 				$arr1=json_encode($data);
 				print_r($arr1);
-			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
 			curl_setopt($curl, CURLOPT_HEADER, false);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',"Authorization: Bearer A21AAE5g3JlqYMybiohwiz_hukSldXQuUYlPO9IBZp4HOvkui-mSLyn-VENPKD4uyQSX0suUphnxc_iIlWuLrCyqYmTAqbL5A"));
