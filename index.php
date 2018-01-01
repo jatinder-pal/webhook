@@ -40,7 +40,7 @@ echo "hello";
 				"tracking_number"=>"XYZ123456",
 				"status"=>"SHIPPED",
 				"shipment_date"=>"2018-05-31",
-				"carrier"=>"SG_SG_POST"
+				"carrier"=>"FEDEX"
 				);
 				$arr1=json_encode($data);
 				print_r($arr1);
