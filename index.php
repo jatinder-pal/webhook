@@ -9,11 +9,26 @@ $data = '';
 	$data1 = json_decode($data, true);
 	if($data1){
 		$order_id=$data1['order_id']; 
-		 
+		$gateway=$data1['gateway']; 
+		$fulfillment_status=$data1['fulfillment_status']; 
+		$fulfillment_status=$data1['fulfillment_status']; 
+		$tracking_number=$data1['fulfillments'][0]['tracking_number']; 
+		$tracking_company=$data1['fulfillments'][0]['tracking_company']; 
+		if($fulfillment_status == 'fulfilled'){
+			$fulfillment_status = 'DELIVERED';
+		}
+		 if($gateway == 'paypal'){
+			 
+			 
+		 }
 	mail('boskim.3ginfo@gmail.com','testing',$order_id,"From: webmaster@example.com" . "\r\n");	
 	
 	}
 	 echo $order_id=238364262429;
+	 $transaction_id='39X24218SL5770941';
+	 $tracking_number='xyz';
+	 $fulfillment_status = 'DELIVERED';
+	 $tracking_company='other';
 	echo $url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'/transactions.json'; //rss link for the twitter timeline
 		$order_data = get_data($url); //dumps the content, you can manipulate as you wish to
 		//print_r($order_data);
@@ -22,6 +37,8 @@ $data = '';
 		 print_r($arr1);
 		 print_r($arr1['transactions'][0]['gateway']);echo "</pre>";
 		 echo "<pre>";print_r($arr1['transactions'][0]['receipt']['transaction_id']);echo "</pre>";
+		 $transaction_id=$arr1['transactions'][0]['receipt']['transaction_id'];
+		 
 		 function get_data($url)
 		{
 		$ch = curl_init();
@@ -60,7 +77,7 @@ $data = '';
 				  CURLOPT_TIMEOUT => 30,
 				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				  CURLOPT_CUSTOMREQUEST => "POST",
-				  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"39X24218SL5770941\",\n\"tracking_number\": \"XYZ123456\",\n\"status\": \"SHIPPED\",\n\"carrier\": \"SG_SG_POST\"\n}\n]\n}",
+				  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\": \"$tracking_company\"\n}\n]\n}",
 				  CURLOPT_HTTPHEADER => array(
 					"Authorization: Bearer $access_token",
 					"Cache-Control: no-cache",
