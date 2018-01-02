@@ -14,15 +14,13 @@ $data = '';
 	
 	}
 	 $order_id=72297906190;
-	$url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'.json'; //rss link for the twitter timeline
+	$url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'/transactions.json'; //rss link for the twitter timeline
 		$order_data = get_data($url); //dumps the content, you can manipulate as you wish to
 		//print_r($order_data);
 		 $arr1=json_decode($order_data, true);
-		 echo "<pre>";print_r($arr1['order']['gateway']);echo "</pre>";
-		 echo $arr1['order']['gateway'][0];
-		/* gets the data from a URL */
-                echo "hello";
-		function get_data($url)
+		 echo "<pre>";print_r($arr1['transactions']['gateway']);echo "</pre>";
+		 echo "<pre>";print_r($arr1['transactions']['receipt']['transaction_id']);echo "</pre>";
+		 function get_data($url)
 		{
 		$ch = curl_init();
 		$timeout = 5;
@@ -33,55 +31,53 @@ $data = '';
 		curl_close($ch);
 		return $data;
 		}
-echo "hello";
+		if($arr1['transactions']['gateway'] == 'paypal') {
+			$ch = curl_init();
+			$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
+			$secret = "EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB";
+			curl_setopt($ch, CURLOPT_URL, "https://api.paypal.com/v1/oauth2/token");
+			curl_setopt($ch, CURLOPT_HEADER, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+			curl_setopt($ch, CURLOPT_USERPWD, $clientId.":".$secret);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+			$result = curl_exec($ch);
+			if(empty($result))die("Error: No response.");
+			else
+			{
+				$json = json_decode($result);
+				$access_token =$json->access_token;
+					$curl = curl_init();
 
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => "https://api.paypal.com/v1/shipping/trackers/",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"39X24218SL5770941\",\n\"tracking_number\": \"XYZ123456\",\n\"status\": \"SHIPPED\",\n\"carrier\": \"SG_SG_POST\"\n}\n]\n}",
+				  CURLOPT_HTTPHEADER => array(
+					"Authorization: Bearer $access_token",
+					"Cache-Control: no-cache",
+					"Content-Type: application/json"
+				  ),
+				));
 
-		$ch = curl_init();
-		$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
-		$secret = "EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB";
-		curl_setopt($ch, CURLOPT_URL, "https://api.paypal.com/v1/oauth2/token");
-		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-		curl_setopt($ch, CURLOPT_USERPWD, $clientId.":".$secret);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-		$result = curl_exec($ch);
-		if(empty($result))die("Error: No response.");
-		else
-		{
-			$json = json_decode($result);
-			$access_token =$json->access_token;
-				$curl = curl_init();
+				$response = curl_exec($curl);
+				$err = curl_error($curl);
 
-			curl_setopt_array($curl, array(
-			  CURLOPT_URL => "https://api.paypal.com/v1/shipping/trackers/",
-			  CURLOPT_RETURNTRANSFER => true,
-			  CURLOPT_ENCODING => "",
-			  CURLOPT_MAXREDIRS => 10,
-			  CURLOPT_TIMEOUT => 30,
-			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			  CURLOPT_CUSTOMREQUEST => "POST",
-			  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"39X24218SL5770941\",\n\"tracking_number\": \"XYZ123456\",\n\"status\": \"SHIPPED\",\n\"carrier\": \"SG_SG_POST\"\n}\n]\n}",
-			  CURLOPT_HTTPHEADER => array(
-				"Authorization: Bearer $access_token",
-				"Cache-Control: no-cache",
-				"Content-Type: application/json"
-			  ),
-			));
+				curl_close($curl);
 
-			$response = curl_exec($curl);
-			$err = curl_error($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				  echo $response;
+				} 
+			}
 
-			curl_close($curl);
-
-			if ($err) {
-			  echo "cURL Error #:" . $err;
-			} else {
-			  echo $response;
-			} 
+			curl_close($ch);
 		}
-
-		curl_close($ch);
-
 	?>
