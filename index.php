@@ -1,5 +1,5 @@
 <?php
-echo "11";	
+echo "12";	
 $data = '';
 	$webhook = fopen('php://input' , 'rb'); 
 	while(!feof($webhook)){
@@ -18,7 +18,9 @@ $data = '';
 		$order_data = get_data($url); //dumps the content, you can manipulate as you wish to
 		//print_r($order_data);
 		 $arr1=json_decode($order_data, true);
-		 echo "<pre>";print_r($arr1['transactions']['gateway']);echo "</pre>";
+		 echo "<pre>";
+		 print_r($arr1);
+		 print_r($arr1['transactions']['gateway']);echo "</pre>";
 		 echo "<pre>";print_r($arr1['transactions']['receipt']['transaction_id']);echo "</pre>";
 		 function get_data($url)
 		{
