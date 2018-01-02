@@ -36,35 +36,25 @@ $data = '';
 echo "hello";
 
 
-		$curl = curl_init();
-
-		curl_setopt_array($curl, array(
-		  CURLOPT_URL => "https://api.paypal.com/v1/oauth2/token",
-		  CURLOPT_RETURNTRANSFER => true,
-		  CURLOPT_ENCODING => "",
-		  CURLOPT_MAXREDIRS => 10,
-		  CURLOPT_TIMEOUT => 30,
-		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		  CURLOPT_CUSTOMREQUEST => "POST",
-		  CURLOPT_POSTFIELDS => "grant_type=client_credentials",
-		  CURLOPT_HTTPHEADER => array(
-			"Authorization: Basic ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC,EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB",
-			"Cache-Control: no-cache",
-			"Content-Type: application/x-www-form-urlencoded",
-		  ),
-		));
-
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
-
-		curl_close($curl);
-
-		if ($err) {
-		  echo "cURL Error #:" . $err;
-		} else {
-		  echo $response;
-		  echo $response['access_token'];
+		$ch = curl_init();
+		$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
+		$secret = "EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB";
+		curl_setopt($ch, CURLOPT_URL, "https://api.paypal.com/v1/oauth2/token");
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+		curl_setopt($ch, CURLOPT_USERPWD, $clientId.":".$secret);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
+		$result = curl_exec($ch);
+		if(empty($result))die("Error: No response.");
+		else
+		{
+			$json = json_decode($result);
+			print_r($json->access_token);
 		}
+
+		curl_close($ch);
 /* 	$curl = curl_init();
 
 curl_setopt_array($curl, array(
