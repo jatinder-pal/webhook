@@ -51,7 +51,6 @@ echo "hello";
 			"Authorization: Basic QWU4czlHQi1BR21MUVI1OGlvYmVPVEJHd0Q0aW0wNnh4MW1hSFhWNmxCamY5cDk1ZFFUa3F0T3VoZjF4V1Y1S3FmUXdaaUlpeno1NmRrOEQ6RUJzZlJFbjFIYjhxZVotVTFkaE1iRmN1YXdqd1RRUGE3OEhPMHJGWUZCVjFobmx6a2NGbkpTMWVyRlYzMzZUQ1RIZFVVOWx3RmdmaDNNWFY=",
 			"Cache-Control: no-cache",
 			"Content-Type: application/x-www-form-urlencoded",
-			"Postman-Token: e9f24fa5-35a4-0325-7893-15ab8708ef66"
 		  ),
 		));
 
@@ -63,7 +62,7 @@ echo "hello";
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
-		  //echo $response;
+		  echo $response;
 		  echo $response['access_token'];
 		}
 /* 	$curl = curl_init();
