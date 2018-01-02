@@ -39,7 +39,7 @@ echo "hello";
 				"transaction_id"=>"65D90556FJ0877605",
 				"tracking_number"=>"XYZ123456",
 				"status"=>"SHIPPED",
-				"shipment_date"=>"2018-01-1",
+				"shipment_date"=>"2018-01-23",
 				"carrier"=>"FEDEX"
 				);
 				$arr1=json_encode($data);
