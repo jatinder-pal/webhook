@@ -34,32 +34,39 @@ $data = '';
 		return $data;
 		}
 echo "hello";
-			/*$curl = curl_init("https://api.paypal.com/v1/shipping/trackers");
-			 $data['trackers'] = array(
-				"transaction_id"=>"39X24218SL5770941",
-				"tracking_number"=>"XYZ123456",
-				"status"=>"SHIPPED",
-				"shipment_date"=>"2018-01-23",
-				"carrier"=>"FEDEX"
-				);
-				$arr1=json_encode($data);
-				print_r($arr1);
-			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-			curl_setopt($curl, CURLOPT_HEADER, false);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',"Authorization: Bearer A21AAEQANA1o5GRhlkMh3IYyoRETfxHYoidhUivlXcL9ctEPVUAnl1IuM-YH6nqDGDR5DkxripUZYGo4DjO52tJ8zbX84z7QQ"));
-			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($arr1));
-
-			// Make the REST call, returning the result
-			$response = curl_exec($curl);
-			print_r($response );
-			if (!$response) {
-				die("Connection Failure.n");
-			}*/
 
 
+		$curl = curl_init();
 
-$curl = curl_init();
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => "https://api.paypal.com/v1/oauth2/token",
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => "",
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 30,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => "POST",
+		  CURLOPT_POSTFIELDS => "grant_type=client_credentials",
+		  CURLOPT_HTTPHEADER => array(
+			"Authorization: Basic QWU4czlHQi1BR21MUVI1OGlvYmVPVEJHd0Q0aW0wNnh4MW1hSFhWNmxCamY5cDk1ZFFUa3F0T3VoZjF4V1Y1S3FmUXdaaUlpeno1NmRrOEQ6RUJzZlJFbjFIYjhxZVotVTFkaE1iRmN1YXdqd1RRUGE3OEhPMHJGWUZCVjFobmx6a2NGbkpTMWVyRlYzMzZUQ1RIZFVVOWx3RmdmaDNNWFY=",
+			"Cache-Control: no-cache",
+			"Content-Type: application/x-www-form-urlencoded",
+			"Postman-Token: e9f24fa5-35a4-0325-7893-15ab8708ef66"
+		  ),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+		  //echo $response;
+		  echo $response['access_token'];
+		}
+/* 	$curl = curl_init();
 
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.paypal.com/v1/shipping/trackers/",
@@ -87,5 +94,5 @@ if ($err) {
   echo "cURL Error #:" . $err;
 } else {
   echo $response;
-}
+} */
 	?>
