@@ -34,9 +34,9 @@ $data = '';
 		return $data;
 		}
 echo "hello";
-			$curl = curl_init("https://api.sandbox.paypal.com/v1/shipping/trackers");
+			$curl = curl_init("https://api.paypal.com/v1/shipping/trackers");
 			 $data['trackers'] = array(
-				"transaction_id"=>"65D90556FJ0877605",
+				"transaction_id"=>"39X24218SL5770941",
 				"tracking_number"=>"XYZ123456",
 				"status"=>"SHIPPED",
 				"shipment_date"=>"2018-01-23",
@@ -47,7 +47,7 @@ echo "hello";
 			curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
 			curl_setopt($curl, CURLOPT_HEADER, false);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',"Authorization: Bearer A21AAGUrw_7kYCADI9vzOwWY9jPNJPNL_XoSxleKUNoktdC8OzSlUFTtm4ewSTHV3GLlZ2nA7mcwfESn4whbfj7pQGkxf2sUQ"));
+			curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',"Authorization: Bearer A21AAEQANA1o5GRhlkMh3IYyoRETfxHYoidhUivlXcL9ctEPVUAnl1IuM-YH6nqDGDR5DkxripUZYGo4DjO52tJ8zbX84z7QQ"));
 			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($arr1));
 
 			// Make the REST call, returning the result
