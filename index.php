@@ -51,37 +51,37 @@ echo "hello";
 		else
 		{
 			$json = json_decode($result);
-			print_r($json->access_token);
+			$access_token =$json->access_token;
+				$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => "https://api.paypal.com/v1/shipping/trackers/",
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => "",
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 30,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => "POST",
+			  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"39X24218SL5770941\",\n\"tracking_number\": \"XYZ123456\",\n\"status\": \"SHIPPED\",\n\"carrier\": \"SG_SG_POST\"\n}\n]\n}",
+			  CURLOPT_HTTPHEADER => array(
+				"Authorization: Bearer $access_token",
+				"Cache-Control: no-cache",
+				"Content-Type: application/json"
+			  ),
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			if ($err) {
+			  echo "cURL Error #:" . $err;
+			} else {
+			  echo $response;
+			} 
 		}
 
 		curl_close($ch);
-/* 	$curl = curl_init();
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.paypal.com/v1/shipping/trackers/",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"39X24218SL5770941\",\n\"tracking_number\": \"XYZ123456\",\n\"status\": \"SHIPPED\",\n\"carrier\": \"SG_SG_POST\"\n}\n]\n}",
-  CURLOPT_HTTPHEADER => array(
-    "Authorization: Bearer A21AAEQANA1o5GRhlkMh3IYyoRETfxHYoidhUivlXcL9ctEPVUAnl1IuM-YH6nqDGDR5DkxripUZYGo4DjO52tJ8zbX84z7QQ",
-    "Cache-Control: no-cache",
-    "Content-Type: application/json",
-    "Postman-Token: 4324ca06-c982-f4c6-6f7c-ff3a14c7fb10"
-  ),
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-curl_close($curl);
-
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-  echo $response;
-} */
 	?>
