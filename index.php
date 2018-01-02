@@ -24,7 +24,7 @@ $data = '';
 	mail('boskim.3ginfo@gmail.com','testing',$order_id,"From: webmaster@example.com" . "\r\n");	
 	
 	}
-	 echo $order_id=238364262429;
+	 echo $order_id=72297906190;
 	 $transaction_id='39X24218SL5770941';
 	 $tracking_number='xyz';
 	 $fulfillment_status = 'DELIVERED';
