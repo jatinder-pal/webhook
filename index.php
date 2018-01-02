@@ -48,7 +48,7 @@ echo "hello";
 		  CURLOPT_CUSTOMREQUEST => "POST",
 		  CURLOPT_POSTFIELDS => "grant_type=client_credentials",
 		  CURLOPT_HTTPHEADER => array(
-			"Authorization: Basic QWU4czlHQi1BR21MUVI1OGlvYmVPVEJHd0Q0aW0wNnh4MW1hSFhWNmxCamY5cDk1ZFFUa3F0T3VoZjF4V1Y1S3FmUXdaaUlpeno1NmRrOEQ6RUJzZlJFbjFIYjhxZVotVTFkaE1iRmN1YXdqd1RRUGE3OEhPMHJGWUZCVjFobmx6a2NGbkpTMWVyRlYzMzZUQ1RIZFVVOWx3RmdmaDNNWFY=",
+			"Authorization: Basic ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC,EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB",
 			"Cache-Control: no-cache",
 			"Content-Type: application/x-www-form-urlencoded",
 		  ),
