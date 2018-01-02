@@ -57,7 +57,7 @@ echo "hello";
 				die("Connection Failure.n");
 			}*/
 
-<?php
+
 
 $curl = curl_init();
 
