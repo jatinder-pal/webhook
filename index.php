@@ -14,11 +14,11 @@ $data = '';
 	
 	}
 	 echo $order_id=238364262429;
-	$url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'/transactions.json'; //rss link for the twitter timeline
+	echo $url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'/transactions.json'; //rss link for the twitter timeline
 		$order_data = get_data($url); //dumps the content, you can manipulate as you wish to
 		//print_r($order_data);
 		 $arr1=json_decode($order_data, true);
-		 echo "<pre>";
+		 echo "<pre> hello";
 		 print_r($arr1);
 		 print_r($arr1['transactions'][0]['gateway']);echo "</pre>";
 		 echo "<pre>";print_r($arr1['transactions'][0]['receipt']['transaction_id']);echo "</pre>";
