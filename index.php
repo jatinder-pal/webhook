@@ -52,7 +52,7 @@ $data = '';
 		return $data;
 		}
 		if($arr1['transactions']['gateway'] == 'paypal') {
-			echo "$arr1['transactions']['gateway'] =".$arr1['transactions']['gateway'] ;
+			echo "hhh" ;
 			$ch = curl_init();
 			$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
 			$secret = "EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB";
