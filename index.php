@@ -29,6 +29,9 @@ $data = '';
 	 $tracking_number='xyz';
 	 $fulfillment_status = 'DELIVERED';
 	 $tracking_company='other';
+	 if($tracking_company == 'other'){
+		 $carrier_name_other = ' \n\"carrier_name_other\": \"other\"';
+		}
 	// echo $url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'/transactions.json';
 		echo $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'/transactions.json';
 		$order_data = get_data($url); //dumps the content, you can manipulate as you wish to
@@ -79,7 +82,7 @@ $data = '';
 				  CURLOPT_TIMEOUT => 30,
 				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 				  CURLOPT_CUSTOMREQUEST => "POST",
-				  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\": \"$tracking_company\"\n}\n]\n}",
+				  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\": \"$tracking_company\"\n,$carrier_name_other}\n]\n}",
 				  CURLOPT_HTTPHEADER => array(
 					"Authorization: Bearer $access_token",
 					"Cache-Control: no-cache",
