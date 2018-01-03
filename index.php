@@ -51,7 +51,7 @@ $data = '';
 		curl_close($ch);
 		return $data;
 		}
-		if($arr1['transactions']['gateway'] == 'paypal') {
+		if($arr1['transactions'][0]['gateway'] == 'paypal') {
 			echo "hhh" ;
 			$ch = curl_init();
 			$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
