@@ -52,6 +52,7 @@ $data = '';
 		return $data;
 		}
 		if($arr1['transactions']['gateway'] == 'paypal') {
+			echo "$arr1['transactions']['gateway'] =".$arr1['transactions']['gateway'] ;
 			$ch = curl_init();
 			$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
 			$secret = "EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB";
@@ -67,7 +68,7 @@ $data = '';
 			else
 			{
 				$json = json_decode($result);
-				$access_token =$json->access_token;
+				echo $access_token =$json->access_token;
 					$curl = curl_init();
 
 				curl_setopt_array($curl, array(
