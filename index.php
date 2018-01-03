@@ -28,7 +28,7 @@ $data = '';
 	 $transaction_id='39X24218SL5770941';
 	 $tracking_number='xyz';
 	 $fulfillment_status = 'DELIVERED';
-	 $tracking_company='other';
+	 $tracking_company='SG_SG_POST';
 	 if($tracking_company == 'other'){
 		 $carrier_name_other = ' \n\"carrier_name_other\": \"test\"';
 		}
