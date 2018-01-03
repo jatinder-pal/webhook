@@ -12,7 +12,7 @@ $data = '';
 		$fulfillment_status=$data1['fulfillment_status']; 
 		$fulfillment_status=$data1['fulfillment_status']; 
 		$tracking_number=$data1['fulfillments'][0]['tracking_number']; 
-		$tracking_company=$data1['fulfillments'][0]['tracking_company']; 
+		$tracking_company='FEDEX'; 
 		if($fulfillment_status == 'fulfilled'){
 			$fulfillment_status = 'DELIVERED';
 		}
