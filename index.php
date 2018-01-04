@@ -119,8 +119,7 @@ $data = '';
 		
 		}
 	  $order_id=53339914254;
-	$ch = curl_init("https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/".$order_id."/.json");
-	
+	$ch = curl_init("https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/".$order_id.".json");
 	$order = array(
 	"order" => array(
 		"note_attributes" => 
