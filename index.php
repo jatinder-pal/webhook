@@ -18,8 +18,8 @@ $data = '';
 		if($fulfillment_status == 'fulfilled'){
 			$fulfillment_status = 'DELIVERED';
 		}
-		 echo $arr1['order']['gateway'][0];
-			function get_data($url)
+		 echo $order_data['order']['gateway'][0];
+		function get_data($url)
 		{
 		$ch = curl_init();
 		$timeout = 5;
@@ -134,5 +134,27 @@ $data = '';
 		
 		}
 	  
-		
+		$order_id=72297906190; 
+		$url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'.json';
+		$order_data = get_data($url);
+		 $order_data=json_decode($order_data, true);
+		 $gateway=$data1['gateway']; 
+		$fulfillment_status = $order_data['order']['fulfillment_status']; 
+		$tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
+		$tracking_company='FEDEX'; 
+		if($fulfillment_status == 'fulfilled'){
+			$fulfillment_status = 'DELIVERED';
+		}
+		 echo $order_data['order']['gateway'][0];
+		function get_data($url)
+		{
+		$ch = curl_init();
+		$timeout = 5;
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		return $data;
+		}
 	?>
