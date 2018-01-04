@@ -138,14 +138,15 @@ $data = '';
 		$url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'.json';
 		$order_data = get_data($url);
 		 $order_data=json_decode($order_data, true);
+		 echo "<pre>";print_r($order_data);echo "</pre>";
 		 $gateway=$data1['gateway']; 
-		$fulfillment_status = $order_data['order']['fulfillment_status']; 
-		$tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
-		$tracking_company='FEDEX'; 
+		echo $fulfillment_status = $order_data['order']['fulfillment_status']; 
+		echo $tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
+		echo $tracking_company='FEDEX'; 
 		if($fulfillment_status == 'fulfilled'){
 			$fulfillment_status = 'DELIVERED';
 		}
-		 echo $order_data['order']['gateway'][0];
+		 echo $order_data['order']['gateway'];
 		function get_data($url)
 		{
 		$ch = curl_init();
