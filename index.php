@@ -8,13 +8,27 @@ $data = '';
 	$data1 = json_decode($data, true);
 	if($data1){
 		$order_id=$data1['order_id']; 
-		$gateway=$data1['gateway']; 
-		$fulfillment_status=$data1['fulfillment_status']; 
-		$fulfillment_status=$data1['fulfillment_status']; 
-		$tracking_number=$data1['fulfillments'][0]['tracking_number']; 
+		$url='https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/'.$order_id.'.json';
+		$order_data = get_data($url);
+		 $order_data=json_decode($order_data, true);
+		 $gateway=$data1['gateway']; 
+		$fulfillment_status = $order_data['order']['fulfillment_status']; 
+		$tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
 		$tracking_company='FEDEX'; 
 		if($fulfillment_status == 'fulfilled'){
 			$fulfillment_status = 'DELIVERED';
+		}
+		 echo $arr1['order']['gateway'][0];
+			function get_data($url)
+		{
+		$ch = curl_init();
+		$timeout = 5;
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		return $data;
 		}
 		//$ch = curl_init("https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/".$order_id."/.json");
 		$ch = curl_init("https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/".$order_id.".json");
@@ -24,7 +38,7 @@ $data = '';
 		"note_attributes" => 
 			array(
 			"name"=>"gateway",
-			"value"=> $gateway
+			"value"=> $gateway .$fulfillment_status.$tracking_company.$tracking_number
 			)
 		)
 	);
