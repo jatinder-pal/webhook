@@ -132,6 +132,7 @@ $data = '';
 	);
 		print_r($order);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($order)); 
+		 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$response = curl_exec($ch);
