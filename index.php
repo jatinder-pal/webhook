@@ -118,7 +118,32 @@ $data = '';
 				mail('boskim.3ginfo@gmail.com','testing',$order_id,"From: webmaster@example.com" . "\r\n");	
 		
 		}
-	 
+	  $order_id=53339914254;
+	$ch = curl_init("https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/".$order_id."/.json");
 	
+	$order = array(
+	"order" => array(
+		"note_attributes" => 
+			array(
+			"name"=>"gateway",
+			"value"=> 'hello'
+			)
+		)
+	);
+		print_r($order);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($order)); 
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$response = curl_exec($ch);
+		curl_close($ch); // close curl session
+		//print_r(json_decode($response, true));
+		$arr1=json_decode($response, true);
+		print_r($arr1);
+		$arr2=$arr1['order'];
+		if(count($response)>0){
+			echo'SUCCESS';
+		} else{
+			echo 'ERROR';
+	}
 		
 	?>
