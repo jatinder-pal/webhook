@@ -15,7 +15,8 @@ $data = '';
 		echo "<pre>";print_r($order_data);echo "</pre>";
 		echo $fulfillment_status = $order_data['order']['fulfillment_status']; 
 		echo $tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
-		echo $tracking_company='FEDEX'; 
+		$tracking_url=$order_data['order']['fulfillments'][0]['tracking_url']; 
+		echo $tracking_company='OTHER'; 
 		if($fulfillment_status == 'fulfilled'){
 			$fulfillment_status = 'DELIVERED';
 		}
@@ -98,7 +99,7 @@ $data = '';
 					  CURLOPT_TIMEOUT => 30,
 					  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 					  CURLOPT_CUSTOMREQUEST => "POST",
-					  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\": \"$tracking_company\"\n}\n]\n}",
+					  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\": \"$tracking_company\"\n,\n\"carrier_name_other\": \"$tracking_url\"\n}\n]\n}",
 					  CURLOPT_HTTPHEADER => array(
 						"Authorization: Bearer $access_token",
 						"Cache-Control: no-cache",
