@@ -51,7 +51,7 @@ $data12 = '12';
 		*/
 		/* add order note */ 
 		
-		 /*if($gateway == 'paypal'){
+		 if($gateway == 'paypal'){
 			$url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'/transactions.json';
 			$order_data = get_data($url); 
 			 $arr1=json_decode($order_data, true);
@@ -120,7 +120,7 @@ $data12 = '12';
 				curl_close($ch);
 			
 				 
-			}*/
+			}
 				//mail('boskim.3ginfo@gmail.com','testing',$order_id,"From: webmaster@example.com" . "\r\n");	
 		
 	}
