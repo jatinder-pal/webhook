@@ -1,17 +1,17 @@
 <?php
-$data = '12';
+$data12 = '12';
 	$webhook = fopen('php://input' , 'rb'); 
 	while(!feof($webhook)){
 		$data .= fread($webhook, 4096); 
 	}
 	fclose($webhook);
 	$data1 = json_decode($data, true);
-	if($data == '12'){
+	if($data12 == '12'){
 		$order_id=$data1['order_id'];
 		echo $order_id=243687817245;
 		echo $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'.json';
-		$order_data = get_data($url);
-		$order_data=json_decode($order_data, true);
+		$order_data1 = get_data($url);
+		$order_data=json_decode($order_data1, true);
 		echo "<pre>";print_r($order_data);echo "</pre>";
 		echo $fulfillment_status = $order_data['order']['fulfillment_status']; 
 		echo $tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
@@ -21,8 +21,7 @@ $data = '12';
 			$fulfillment_status = 'DELIVERED';
 		}
 		 echo $gateway=$order_data['order']['gateway'];
-		function get_data($url)
-		{
+		function get_data($url){
 		$ch = curl_init();
 		$timeout = 5;
 		curl_setopt($ch,CURLOPT_URL,$url);
