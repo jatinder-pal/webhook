@@ -88,7 +88,7 @@ $data12 = '12';
 							"tracking_number": "$tracking_number",
 							"status": "SHIPPED",
 							"carrier":"OTHER",
-							"carrier_name_other":"$tracking_url"
+							"carrier_name_other":"tracking_url"
 							}
 							]
 							};
