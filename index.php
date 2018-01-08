@@ -10,7 +10,15 @@ $data12 = '12';
 		$order_id=$data1['order_id'];
 		echo $order_id=243687817245;
 		echo $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'.json';
-		$order_data1 = get_data($url);
+		
+		$ch = curl_init();
+		$timeout = 5;
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+		$data = curl_exec($ch);
+		curl_close($ch);
+		$order_data1 = $data;
 		$order_data=json_decode($order_data1, true);
 		echo "<pre>";print_r($order_data);echo "</pre>";
 		echo $fulfillment_status = $order_data['order']['fulfillment_status']; 
@@ -21,16 +29,7 @@ $data12 = '12';
 			$fulfillment_status = 'DELIVERED';
 		}
 		 echo $gateway=$order_data['order']['gateway'];
-		function get_data($url){
-		$ch = curl_init();
-		$timeout = 5;
-		curl_setopt($ch,CURLOPT_URL,$url);
-		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
-		$data = curl_exec($ch);
-		curl_close($ch);
-		return $data;
-		}
+		
 		/* add order note */
 		/* $ch = curl_init("https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/".$order_id.".json");
 		//$ch = curl_init("https://fd618d2f010bae1b72fc359c2e9ec5e6:058e8334fcd174ffa4ebdd761bf5e752@jai-shri-ram-2.myshopify.com/admin/orders/".$order_id.".json");
