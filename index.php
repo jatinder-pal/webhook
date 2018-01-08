@@ -81,7 +81,19 @@ $data12 = '12';
 					$json = json_decode($result);
 					echo $access_token =$json->access_token;
 					$curl = curl_init();
-
+							$tracking_data= {
+							"trackers": [
+							{
+							"transaction_id": "$transaction_id",
+							"tracking_number": "$tracking_number",
+							"status": "SHIPPED",
+							"carrier":"OTHER",
+							"carrier_name_other":"$tracking_url"
+							}
+							]
+							};
+							$tracking_data = json_encode($tracking_data);
+							print_r($tracking_data);
 					curl_setopt_array($curl, array(
 					  CURLOPT_URL => "https://api.paypal.com/v1/shipping/trackers/",
 					  CURLOPT_RETURNTRANSFER => true,
@@ -90,17 +102,7 @@ $data12 = '12';
 					  CURLOPT_TIMEOUT => 30,
 					  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 					  CURLOPT_CUSTOMREQUEST => "POST",
-					   CURLOPT_POSTFIELDS => "{
-						   "trackers":[
-							   {
-								   "transaction_id":"$transaction_id",
-								   "tracking_number":"$tracking_number",
-								   "status":"$fulfillment_status",
-								   "carrier":"$tracking_company",
-								   "carrier_name_other":"$tracking_url"
-								}
-							]
-						}",
+					   CURLOPT_POSTFIELDS => $tracking_data,
 					  CURLOPT_HTTPHEADER => array(
 						"Authorization: Bearer $access_token",
 						"Cache-Control: no-cache",
