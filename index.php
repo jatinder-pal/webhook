@@ -52,8 +52,15 @@ $data12 = '12';
 		/* add order note */ 
 		
 		 if($gateway == 'paypal'){
-			$url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'/transactions.json';
-			$order_data = get_data($url); 
+			echo $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'/transactions.json';
+			$ch = curl_init();
+			$timeout = 5;
+			curl_setopt($ch,CURLOPT_URL,$url);
+			curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+			curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
+			$data = curl_exec($ch);
+			curl_close($ch);
+			$order_data = $data;
 			 $arr1=json_decode($order_data, true);
 			 print_r($arr1);
 			 print_r($arr1['transactions'][0]['gateway']);echo "</pre>";
@@ -62,14 +69,7 @@ $data12 = '12';
 			 
 			 function get_data($url)
 			{
-			$ch = curl_init();
-			$timeout = 5;
-			curl_setopt($ch,CURLOPT_URL,$url);
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-			curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);
-			$data = curl_exec($ch);
-			curl_close($ch);
-			return $data;
+			
 			} 
 				$ch = curl_init();
 				$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
