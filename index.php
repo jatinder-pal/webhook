@@ -23,6 +23,7 @@ $data12 = '12';
 		echo "<pre>";print_r($order_data);echo "</pre>";
 		echo $fulfillment_status = $order_data['order']['fulfillment_status']; 
 		echo $tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
+		echo $tracking_number=str_replace('\t','',$tracking_number);
 		echo $tracking_url=$order_data['order']['fulfillments'][0]['tracking_url']; 
 		echo $tracking_company='OTHER'; 
 		if($fulfillment_status == 'fulfilled'){
@@ -90,8 +91,8 @@ $data12 = '12';
 					  CURLOPT_TIMEOUT => 30,
 					  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 					  CURLOPT_CUSTOMREQUEST => "POST",
-					  CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"97G88186B67796326\",\n\"tracking_number\": \"LX093167323CN\t\",\n\"status\": \"SHIPPED\",\n\"carrier\":\"OTHER\",\n\"carrier_name_other\":\"http://www.17track.net/en\"\n}\n]\n}",
-					  /* CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\":\"OTHER\",\n\"carrier_name_other\":\"tracking_url\"\n}\n]\n}",*/
+					  /*CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"97G88186B67796326\",\n\"tracking_number\": \"LX093167323CN\t\",\n\"status\": \"SHIPPED\",\n\"carrier\":\"OTHER\",\n\"carrier_name_other\":\"http://www.17track.net/en\"\n}\n]\n}",*/
+					   CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\":\"OTHER\",\n\"carrier_name_other\":\"$tracking_url\"\n}\n]\n}",
 					  CURLOPT_HTTPHEADER => array(
 						"Authorization: Bearer $access_token",
 						"Cache-Control: no-cache",
