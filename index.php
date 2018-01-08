@@ -52,7 +52,7 @@ $data12 = '12';
 		/* add order note */ 
 		
 		 if($gateway == 'paypal'){
-			echo $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'/transactions.json';
+			 $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'/transactions.json';
 			$ch = curl_init();
 			$timeout = 5;
 			curl_setopt($ch,CURLOPT_URL,$url);
@@ -62,16 +62,10 @@ $data12 = '12';
 			curl_close($ch);
 			$order_data = $data;
 			 $arr1=json_decode($order_data, true);
-			 print_r($arr1);
 			 print_r($arr1['transactions'][0]['gateway']);echo "</pre>";
 			 echo "<pre>";print_r($arr1['transactions'][0]['receipt']['transaction_id']);echo "</pre>";
-			 $transaction_id=$arr1['transactions'][0]['receipt']['transaction_id'];
-			 
-			 function get_data($url)
-			{
-			
-			} 
-				$ch = curl_init();
+			 echo $transaction_id=$arr1['transactions'][0]['receipt']['transaction_id'];
+			 $ch = curl_init();
 				$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
 				$secret = "EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB";
 				curl_setopt($ch, CURLOPT_URL, "https://api.paypal.com/v1/oauth2/token");
