@@ -20,7 +20,7 @@ $data12 = '12';
 		curl_close($ch);
 		$order_data1 = $data;
 		$order_data=json_decode($order_data1, true);
-		echo "<pre>";print_r($order_data);echo "</pre>";
+		//echo "<pre>";print_r($order_data);echo "</pre>";
 		echo $fulfillment_status = $order_data['order']['fulfillment_status']; 
 		echo $tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
 		$tracking_url=$order_data['order']['fulfillments'][0]['tracking_url']; 
