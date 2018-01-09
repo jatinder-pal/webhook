@@ -8,7 +8,7 @@ $data12 = '12';
 	$data1 = json_decode($data, true);
 	if($data12 == '12'){
 		$order_id=$data1['order_id'];
-		echo $order_id=243291193373;
+		echo $order_id=242686001181;
 		echo $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'.json';
 		
 		$ch = curl_init();
@@ -65,6 +65,7 @@ $data12 = '12';
 			 $arr1=json_decode($order_data, true);
 			 print_r($arr1['transactions'][0]['gateway']);echo "</pre>";
 			 echo $transaction_id=$arr1['transactions'][0]['receipt']['transaction_id'];
+			 echo "tracking number=".$tracking_number.'<br>';
 			 $ch = curl_init();
 				$clientId = "ASEX-M6k-YobK8_DFB3vgFZiLvmjJKzDjP6cVGjUZgRxJWVUMQwpCO55C-FfGUqmjVu1JeJ9viUNglxC";
 				$secret = "EORrLsDIcmU16qpFmaJYuRL2KH78rQWtuSBqK6zJAupJ2nAjeVFy-RHqelvMLpwQbqyiPfagZBWIQScB";
@@ -92,7 +93,7 @@ $data12 = '12';
 					  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 					  CURLOPT_CUSTOMREQUEST => "POST",
 					  /*CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"97G88186B67796326\",\n\"tracking_number\": \"LX093167323CN\t\",\n\"status\": \"SHIPPED\",\n\"carrier\":\"OTHER\",\n\"carrier_name_other\":\"http://www.17track.net/en\"\n}\n]\n}",*/
-					   CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"RH074918078TR\",\n\"status\": \"$fulfillment_status\",\n\"carrier\":\"OTHER\",\n\"carrier_name_other\":\"$tracking_url\"\n}\n]\n}",
+					   CURLOPT_POSTFIELDS => "{\n\"trackers\": [\n{\n\"transaction_id\": \"$transaction_id\",\n\"tracking_number\": \"$tracking_number\",\n\"status\": \"$fulfillment_status\",\n\"carrier\":\"OTHER\",\n\"carrier_name_other\":\"$tracking_url\"\n}\n]\n}",
 					  CURLOPT_HTTPHEADER => array(
 						"Authorization: Bearer $access_token",
 						"Cache-Control: no-cache",
