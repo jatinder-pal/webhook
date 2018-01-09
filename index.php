@@ -21,15 +21,15 @@ $data12 = '12';
 		$order_data1 = $data;
 		$order_data=json_decode($order_data1, true);
 		//echo "<pre>";print_r($order_data);echo "</pre>";
-		echo $fulfillment_status = $order_data['order']['fulfillment_status']; 
-		echo $tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
-		echo $tracking_number=str_replace('\t','',$tracking_number);
-		echo $tracking_url=$order_data['order']['fulfillments'][0]['tracking_url']; 
-		echo $tracking_company='OTHER'; 
+		$fulfillment_status = $order_data['order']['fulfillment_status']; 
+		$tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
+		echo $tracking_number=str_replace('\t','',$tracking_number) .'<br>';
+		$tracking_url=$order_data['order']['fulfillments'][0]['tracking_url']; 
+		$tracking_company='OTHER'; 
 		if($fulfillment_status == 'fulfilled'){
 			$fulfillment_status = 'DELIVERED';
 		}
-		 echo $gateway=$order_data['order']['gateway'];
+		 $gateway=$order_data['order']['gateway'];
 		
 		/* add order note */
 		/* $ch = curl_init("https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/".$order_id.".json");
