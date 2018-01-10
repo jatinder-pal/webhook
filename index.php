@@ -1,5 +1,5 @@
 <?php
-$data12 = '12';
+$data = '';
 	$webhook = fopen('php://input' , 'rb'); 
 	while(!feof($webhook)){
 		$data .= fread($webhook, 4096); 
