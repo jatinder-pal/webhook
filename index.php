@@ -24,6 +24,7 @@ $data12 = '12';
 		$fulfillment_status = $order_data['order']['fulfillment_status']; 
 		$tracking_number=$order_data['order']['fulfillments'][0]['tracking_number']; 
 		echo $tracking_number=str_replace('\t','',$tracking_number);
+		$tracking_number = str_replace('\\', '', $tracking_number);
 		$tracking_url=$order_data['order']['fulfillments'][0]['tracking_url']; 
 		$tracking_company='OTHER'; 
 		if($fulfillment_status == 'fulfilled'){
