@@ -6,9 +6,9 @@ $data12 = '12';
 	}
 	fclose($webhook);
 	$data1 = json_decode($data, true);
-	if($data12 == '12'){
+	if($data1){
 		$order_id=$data1['order_id'];
-		echo $order_id=239226748957;
+		//echo $order_id=239226748957;
 		echo $url='https://48889f0c2488fe101c19b98c2b12ad36:0b69dd28a3c9d7753bef022b939566e3@unmatched-market.myshopify.com/admin/orders/'.$order_id.'.json';
 		
 		$ch = curl_init();
