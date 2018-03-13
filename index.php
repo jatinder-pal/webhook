@@ -18,7 +18,7 @@ if($data !=''){
 					'quantity' => 1,
 					'variant_id' => 255841435662
 					
-				),
+				)
 				 
 			);
 			$order = array(
@@ -54,7 +54,7 @@ if($data !=''){
 						'phone' => $data1['billing_address']['phone'],
 						'province' =>  $data1['billing_address']['province']
 				),
-				'email' =>$data1['email'],
+				'email' =>$data1['email']
 			));
 	  	
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($order)); 
